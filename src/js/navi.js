@@ -26,6 +26,7 @@ export default class Navi extends React.Component {
         onClick={this.handleClick}
         selectedKeys={[this.state.current]}
         mode="horizontal"
+        theme="dark"
       >
         <Menu.Item key="mail">
           <Icon type="mail" />Navigation One

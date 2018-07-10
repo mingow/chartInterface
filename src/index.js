@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Navi from './js/navi.js'
+import Navi from './js/navi.js';
+
 
 class App extends React.Component {
   render() {
