@@ -8,12 +8,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navi />
-        <div className="App-header">
-          <h2>欢迎来到菜鸟教程</h2>
-        </div>
-        <p className="App-intro">
-          你可以在 <code>src/App.js</code> 文件中修改。
-        </p>
       </div>
     );
   }
