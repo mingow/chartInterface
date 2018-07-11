@@ -31,8 +31,8 @@ export default class Navi extends React.Component {
         style={{ height: '100%', borderRight: 0 }}
       >
         <SubMenu key="sub1" title={<span><Icon type="user" />部门数据</span>}>
-          <Menu.Item key="1"><Link to="/test" >后段人均产值</Link></Menu.Item>
-          <Menu.Item key="2">目标达成情况</Menu.Item>
+          <Menu.Item key="1"><Link to="/" >后段人均产值</Link></Menu.Item>
+          <Menu.Item key="2"><Link to="/test" >目标达成情况</Link></Menu.Item>
         </SubMenu>
         <SubMenu key="sub2" title={<span><Icon type="laptop" />产品数据</span>}>
           <Menu.Item key="5">生产量变化</Menu.Item>

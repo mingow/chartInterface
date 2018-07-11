@@ -8,7 +8,7 @@ export default class MainFrame extends React.Component {
   render(){
     return (
       <div>
-        <div className='floatingBox'><MonthPicker placeholder="Select month" /></div>
+        <div className='floatingBox'><MonthPicker placeholder="选择月份" /></div>
         <DepartDataHoursByMonth/>
         <DepartDataCapacityByMonth/>
       </div>
