@@ -1,1 +1,30 @@
 @import './antd.css';
+
+.floatingBox{
+  position:fixed;
+  top:72px;
+  right:40px;
+}
+
+.topBar{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index: 1000;
+}
+
+.sideBar{
+  position:fixed;
+  height:100%;
+  left:0;
+  z-index: 900;
+}
+
+.body{
+  margin-top:64px
+}
+
+.content{
+  margin-left: 200px;
+
+}

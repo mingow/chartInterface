@@ -29,6 +29,16 @@ module.exports = {
   devServer: {
     contentBase: "./",
     historyApiFallback: true,
-    inline: true
+    inline: true,
+    proxy:{
+      '/webservices/*': {
+        target: 'http://172.18.0.205/',
+        secure: false
+      },
+      '/WebService_main.asmx':{
+        target: 'http://172.18.0.205/',
+        secure: false
+      }
+    }
   }
 }
