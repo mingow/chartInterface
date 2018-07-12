@@ -17,14 +17,19 @@ export default class DepartDataHoursByMonth extends React.Component {
       currentMonth:{}
     }
   }
-  componentDidMount(){
+
+  componentWillReceiveProps(nextProps){
+    this.updateData(nextProps.currentLine);
+  }
+
+  updateData(val){
     const ds = new DataSet({
       state:{
         currentMonth:1
       }
     })
     var data = {
-      Line:'all'
+      Line:val?val:"all"
     }
     fetch('/WebService_main.asmx/GetSumData',{
       method: 'post',
@@ -54,11 +59,15 @@ export default class DepartDataHoursByMonth extends React.Component {
   })
   .catch(error => console.log('error is', error));
   }
+
+  componentDidMount(){
+    this.updateData();
+  }
   render(){
     return (
       <div>
-        <h2>总工时月度走势图</h2>
-        <Chart width={800} height={400} cols={this.state.cols} data={this.state.dataView}
+        <h2>月度总工时走势图</h2>
+        <Chart height={400} cols={this.state.cols} data={this.state.dataView}
         onIntervalClick={(ev) => {
           var month = parseInt(ev.data._origin.Month);
           if(this.state.rawData[month-1].Nhours){
