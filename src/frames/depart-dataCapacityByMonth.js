@@ -7,7 +7,7 @@ export default class DepartDataCapacityByMonth extends React.Component {
     super(props)
     this.state={
       cols : {
-        val: { alias: '效率' },
+        UUvalue: { alias: '效率' },
         Month: { alias: '月份' }
       },
       dataView:'',
@@ -51,6 +51,11 @@ export default class DepartDataCapacityByMonth extends React.Component {
       type:'map',
       callback:function(obj){
         obj.val= parseFloat(obj.val);
+        switch(obj.p){
+          case 'UUvalue':obj.p="前年数值";break;
+          case 'Uvalue':obj.p="去年数值";break;
+          case 'Nvalue':obj.p="当年数值";break;
+        }
         return obj;
       }
     })
@@ -67,7 +72,7 @@ export default class DepartDataCapacityByMonth extends React.Component {
     return (
       <div>
         <h2>月度人均产值走势图</h2>
-        <Chart height={400} cols={this.state.cols} data={this.state.dataView}
+        <Chart height={400} scale={this.state.cols} data={this.state.dataView}
         onPointClick={(ev) => {
           var month = parseInt(ev.data._origin.Month);
           if(this.state.rawData[month-1].Nvalue){
@@ -84,7 +89,7 @@ export default class DepartDataCapacityByMonth extends React.Component {
         >
           <Axis name="Month" />
           <Axis name="val" />
-          <Legend />
+          <Legend  />
           <Tooltip />
           <Geom type="line" position="Month*val" color="p" />
           <Geom select={true} type='point' position="Month*val" color="p" size={4} shape={'circle'} style={{ stroke: '#fff', lineWidth: 1}} />

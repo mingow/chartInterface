@@ -56,9 +56,13 @@ export default class DepartDataValuesByMonth extends React.Component {
     dvForAll.transform({
       type:'map',
       callback:function(obj){
-        obj.val= parseFloat(obj.val);
-        if(obj.p=='Uvalue'){obj.v = parseFloat(obj.val)*parseFloat(obj.Uhours)}
-        if(obj.p=='Nvalue'){obj.v = parseFloat(obj.val)*parseFloat(obj.Nhours)}
+        obj.val= parseFloat(parseFloat(obj.val).toFixed(3));
+        // if(obj.p=='Uvalue'){obj.v = parseFloat(obj.val)*parseFloat(obj.Uhours)}
+        // if(obj.p=='Nvalue'){obj.v = parseFloat(obj.val)*parseFloat(obj.Nhours)}
+        switch(obj.p){
+          case 'Ucapacity':obj.p="去年数值";break;
+          case 'Ncapacity':obj.p="当年数值";break;
+        }
         return obj;
       }
     })

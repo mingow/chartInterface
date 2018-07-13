@@ -51,6 +51,10 @@ export default class DepartDataHoursByMonth extends React.Component {
       type:'map',
       callback:function(obj){
         obj.val= parseFloat(obj.val);
+        switch(obj.p){
+          case 'Uhours':obj.p="去年数值";break;
+          case 'Nhours':obj.p="当年数值";break;
+        }
         return obj;
       }
     })

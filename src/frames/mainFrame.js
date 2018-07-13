@@ -9,6 +9,7 @@ import DepartDataHoursByDays from './depart-dataHoursByDays'
 import DepartDataCapacityByDays from './depart-dataCapacityByDays'
 import DepartDataValueByDays from './depart-dataValueByDays'
 import DepartReachGoalByDays from './depart-reachGoalByDays'
+import DepartDataLineEfficiencyGoalByYears from './depart-dataLineEfficiencyGoalByYears'
 
 export default class MainFrame extends React.Component {
 
@@ -44,9 +45,12 @@ export default class MainFrame extends React.Component {
         </Select>
           <MonthPicker placeholder="选择月份" />
         </div>
-        <DepartDataValuesByMonth currentLine={this.state.currentLine}/>
-        <DepartDataHoursByMonth currentLine={this.state.currentLine}/>
-        <DepartDataCapacityByMonth currentLine={this.state.currentLine}/>
+        <div className='FL'>
+          <DepartDataValuesByMonth currentLine={this.state.currentLine}/>
+          <DepartDataHoursByMonth currentLine={this.state.currentLine}/>
+          <DepartDataCapacityByMonth currentLine={this.state.currentLine}/>
+        </div>
+        <DepartDataLineEfficiencyGoalByYears currentLine={this.state.currentLine}/>
         <DepartReachGoalByDays currentLine={this.state.currentLine}/>
         <DepartDataHoursByDays currentLine={this.state.currentLine}/>
         <DepartDataCapacityByDays currentLine={this.state.currentLine}/>

@@ -8,6 +8,17 @@
   padding:0 5px;
 }
 
+.FL > div{
+  float:left;
+}
+
+.FL::after{
+  display:block;
+  overflow: hidden;
+  clear:both;
+  content: "";
+}
+
 .floatingBox > div{
   margin:0 5px;
 }
