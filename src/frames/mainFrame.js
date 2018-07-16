@@ -10,6 +10,7 @@ import DepartDataCapacityByDays from './depart-dataCapacityByDays'
 import DepartDataValueByDays from './depart-dataValueByDays'
 import DepartReachGoalByDays from './depart-reachGoalByDays'
 import DepartDataLineEfficiencyGoalByYears from './depart-dataLineEfficiencyGoalByYears'
+import DepartDataHoursCircleByMonth from './depart-dataHoursCircleByMonth'
 
 export default class MainFrame extends React.Component {
 
@@ -34,15 +35,19 @@ export default class MainFrame extends React.Component {
     this.setState({currentLine:val});
   }
 
+  onChange(date, dateString) {
+    this.setState({month:dataString});
+  }
+
   render(){
     return (
       <div>
         <div className='floatingBox'>
-        当前线别：{this.state.currentLine?this.state.currentLine:"无"}<span>  </span>
-        <Select defaultValue="" onChange={this.handleChange.bind(this)} style={{ width: 120 }}>
-        {this.state.line.map((item,i)=>(<Option key={i} value={item.val}>{item.text}</Option>))}
-        </Select>
-          <MonthPicker placeholder="选择月份" />
+          当前线别：{this.state.currentLine?this.state.currentLine:"无"}<span>  </span>
+          <Select defaultValue="" onChange={this.handleChange.bind(this)} style={{ width: 120 }}>
+          {this.state.line.map((item,i)=>(<Option key={i} value={item.val}>{item.text}</Option>))}
+          </Select>
+          <MonthPicker onChange={this.onChange.bind(this)} placeholder="选择月份" />
         </div>
         <Row>
           <Col span={8}><DepartDataValuesByMonth currentLine={this.state.currentLine}/></Col>
@@ -51,15 +56,20 @@ export default class MainFrame extends React.Component {
         </Row>
         <Row>
           <Col span = {12}><DepartDataLineEfficiencyGoalByYears currentLine={this.state.currentLine}/></Col>
-          <Col span = {12}><DepartDataValueByDays currentLine={this.state.currentLine} info={this.state.line.filter((item)=>{
+          <Col span = {12}><DepartDataHoursCircleByMonth /></Col>
+        </Row>
+        <Row>
+          <Col span = {24}><DepartReachGoalByDays currentLine={this.state.currentLine}/></Col>
+        </Row>
+        <Row>
+          <Col span = {24}>
+            <DepartDataValueByDays currentLine={this.state.currentLine} info={this.state.line.filter((item)=>{
               if(item.val==this.state.currentLine){
                 return true;
               }
               return false;
-            })}/></Col>
-        </Row>
-        <Row>
-          <Col span = {24}><DepartReachGoalByDays currentLine={this.state.currentLine}/></Col>
+            })}/>
+          </Col>
         </Row>
 
 
