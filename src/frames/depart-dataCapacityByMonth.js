@@ -72,7 +72,7 @@ export default class DepartDataCapacityByMonth extends React.Component {
     return (
       <div>
         <h2>月度人均产值走势图</h2>
-        <Chart height={400} scale={this.state.cols} data={this.state.dataView}
+        <Chart forceFit height={400} scale={this.state.cols} data={this.state.dataView}
         onPointClick={(ev) => {
           var month = parseInt(ev.data._origin.Month);
           if(this.state.rawData[month-1].Nvalue){

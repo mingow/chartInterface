@@ -1,5 +1,5 @@
 import React from 'react';
-import { DatePicker,Select ,message,Menu,Button,Icon  } from 'antd';
+import { DatePicker,Select ,message,Menu,Button,Icon,Layout,Row, Col   } from 'antd';
 const Option = Select.Option;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 import DepartDataHoursByMonth from './depart-dataHoursByMonth'
@@ -17,15 +17,14 @@ export default class MainFrame extends React.Component {
     super(props);
     this.state={
       month:"",
-      currentLine:"",
+      currentLine:"all",
       line:[
-        {text:"所有",val:"all"},
-        {text:"2FA-1",val:"2FA1"},
-        {text:"2FB-1",val:"2FB1"},
-        {text:"2FB-2",val:"2FB2"},
-        {text:"2FC-1",val:"2FC1"},
-        {text:"2FC-2",val:"2FC2"},
-        {text:"2FC-3",val:"2FC3"}
+        {text:"所有",val:"all",goal:60},
+        {text:"2FA-1",val:"2FA1",goal:55.5},
+        {text:"2FB-2",val:"2FB2",goal:48},
+        {text:"2FC-1",val:"2FC1",goal:59},
+        {text:"2FC-2",val:"2FC2",goal:86},
+        {text:"2FC-3",val:"2FC3",goal:66}
       ]
 
     }
@@ -45,16 +44,25 @@ export default class MainFrame extends React.Component {
         </Select>
           <MonthPicker placeholder="选择月份" />
         </div>
-        <div className='FL'>
-          <DepartDataValuesByMonth currentLine={this.state.currentLine}/>
-          <DepartDataHoursByMonth currentLine={this.state.currentLine}/>
-          <DepartDataCapacityByMonth currentLine={this.state.currentLine}/>
-        </div>
-        <DepartDataLineEfficiencyGoalByYears currentLine={this.state.currentLine}/>
-        <DepartReachGoalByDays currentLine={this.state.currentLine}/>
-        <DepartDataHoursByDays currentLine={this.state.currentLine}/>
-        <DepartDataCapacityByDays currentLine={this.state.currentLine}/>
-        <DepartDataValueByDays currentLine={this.state.currentLine}/>
+        <Row>
+          <Col span={8}><DepartDataValuesByMonth currentLine={this.state.currentLine}/></Col>
+          <Col span={8}><DepartDataHoursByMonth currentLine={this.state.currentLine}/></Col>
+          <Col span={8}><DepartDataCapacityByMonth currentLine={this.state.currentLine}/></Col>
+        </Row>
+        <Row>
+          <Col span = {12}><DepartDataLineEfficiencyGoalByYears currentLine={this.state.currentLine}/></Col>
+          <Col span = {12}><DepartDataValueByDays currentLine={this.state.currentLine} info={this.state.line.filter((item)=>{
+              if(item.val==this.state.currentLine){
+                return true;
+              }
+              return false;
+            })}/></Col>
+        </Row>
+        <Row>
+          <Col span = {24}><DepartReachGoalByDays currentLine={this.state.currentLine}/></Col>
+        </Row>
+
+
 
       </div>
     )

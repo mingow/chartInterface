@@ -88,7 +88,7 @@ export default class DepartDataLineEfficiencyGoalByYears extends React.Component
             },
           ]}
           />
-        {this.state.data.map( data =>{
+        {this.state.data.map( (data,i) =>{
           const yGap = 0.12;
           const max = data['goal']||data['2018']*1.1;
             const cols ={
@@ -104,7 +104,7 @@ export default class DepartDataLineEfficiencyGoalByYears extends React.Component
               }
             }
             return (
-            <View start={{x: 0,
+            <View key = {i} start={{x: 0,
                       y:y}}
               end={{x: 1,
                       y: y + yGap}}

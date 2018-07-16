@@ -71,7 +71,7 @@ export default class DepartDataHoursByMonth extends React.Component {
     return (
       <div>
         <h2>月度总工时走势图</h2>
-        <Chart height={400} cols={this.state.cols} data={this.state.dataView}
+        <Chart forceFit height={400} cols={this.state.cols} data={this.state.dataView}
         onIntervalClick={(ev) => {
           var month = parseInt(ev.data._origin.Month);
           if(this.state.rawData[month-1].Nhours){

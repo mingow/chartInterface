@@ -16,14 +16,25 @@ export default class DepartDataHoursByDays extends React.Component {
         },
         val: {
           sync: true
+        },
+        p: {
+          type: 'linear',
+          min: 0,
+          max: 100,
+          sync: true,
+          alias: '效率',
+
         }
       },
-      rawData:[]
+      rawData:[],
+      info:{},
+      currentLine:'all'
     }
   }
 
   componentWillReceiveProps(nextProps){
     this.updateData(nextProps.currentLine);
+    this.setState({currentLine:nextProps.currentLine,info:nextProps.info});
   }
 
   updateData(val){
@@ -122,7 +133,20 @@ export default class DepartDataHoursByDays extends React.Component {
         <Chart height={300} data={this.state.rawData} scale={this.state.cols} forceFit >
           <Tooltip title='date' />
           <Axis name='day' grid={null} />
-          <Geom type='polygon' position="week*day*date" shape='boundary-polygon' color={['p', '#BAE7FF-#1890FF-#0050B3']} />
+          <Geom type='polygon' position="week*day*date" shape='boundary-polygon' color={['p', '#F51D27-#FA541C-#FFBE15-#FFF2D1-#E3F6FF-#85C6FF-#0086FA-#0A61D7']} color={['p', (p)=>{
+        	//some code
+            var trans = p - this.state.info[0].goal;
+            var R=0,G=0,B=0;
+            if(trans > 0 ){
+              B=255;
+              R=-4.25*2*trans+240;
+              G=-1.6167*2*trans+240;
+            }else{
+              R=255;
+              G=B=4.25*trans+240;
+            }
+            return 'rgb('+R.toString()+','+G.toString()+','+B.toString()+')'
+	}]}/>
           <Coord reflect='y' />
         </Chart>
       </div>
