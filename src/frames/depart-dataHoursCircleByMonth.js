@@ -16,8 +16,8 @@ export default class DepartDataHoursCircleByMonth extends React.Component {
     }
   }
 
-  updateData(){
-    fetch("/webservices/public_services.asmx/getHoursDistribution?month="+this.state.month)
+  updateData(month){
+    fetch("/webservices/public_services.asmx/getHoursDistribution?month="+month)
     .then(response => response.json()).then(data => {
       console.log(data);
       const dv = new DataView();
@@ -41,6 +41,9 @@ export default class DepartDataHoursCircleByMonth extends React.Component {
           obj.value = node.value;
           obj.x = node.x;
           obj.y = node.y;
+          obj.parent = node.parent.data.sum;
+          obj.percent = (node.data.sum/node.parent.data.sum*100).toFixed(2)+'%';
+          console.log(node,obj);
           source.push(obj);
           return node;
         });
@@ -48,8 +51,12 @@ export default class DepartDataHoursCircleByMonth extends React.Component {
     })
   }
 
+  componentWillReceiveProps(nextProps){
+    this.updateData(nextProps.month);
+  }
+
   componentDidMount(){
-    this.updateData();
+    this.updateData(this.state.month);
   }
 
   render(){
@@ -59,7 +66,7 @@ export default class DepartDataHoursCircleByMonth extends React.Component {
         <Chart  data={this.state.source} forceFit={true} >
           <Coord type='polar' innerRadius={0.3} />
           <Tooltip showTitle={false} />
-          <Geom type='polygon' position='x*y' active={false} color={['value', '#BAE7FF-#1890FF-#0050B3']} style={{stroke: '#FFF',lineWidth: 1}} tooltip='label*sum' />
+          <Geom type='polygon' position='x*y' active={false} color={['value', '#BAE7FF-#1890FF-#0050B3']} style={{stroke: '#FFF',lineWidth: 1}} tooltip='label*sum*percent' />
         </Chart>
       </div>
     )

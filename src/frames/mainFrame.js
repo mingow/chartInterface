@@ -16,8 +16,10 @@ export default class MainFrame extends React.Component {
 
   constructor(props){
     super(props);
+    var current = new Date();
+    current = current.getFullYear()+'-'+(current.getMonth()+1)+'-1';
     this.state={
-      month:"",
+      month:current,
       currentLine:"all",
       line:[
         {text:"所有",val:"all",goal:60},
@@ -36,7 +38,7 @@ export default class MainFrame extends React.Component {
   }
 
   onChange(date, dateString) {
-    this.setState({month:dataString});
+    this.setState({month:dateString + '-01'});
   }
 
   render(){
@@ -56,7 +58,7 @@ export default class MainFrame extends React.Component {
         </Row>
         <Row>
           <Col span = {12}><DepartDataLineEfficiencyGoalByYears currentLine={this.state.currentLine}/></Col>
-          <Col span = {12}><DepartDataHoursCircleByMonth /></Col>
+          <Col span = {12}><DepartDataHoursCircleByMonth month={this.state.month} /></Col>
         </Row>
         <Row>
           <Col span = {24}><DepartReachGoalByDays currentLine={this.state.currentLine}/></Col>
